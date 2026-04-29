@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 必须对应 Mapper 接口的全限定名 -->
+<mapper namespace="com.example.demo.mapper.UserMapper">
+
+    <delete id="deleteUser">
+        delete from users where id = #{id}
+    </delete>
+
+    <select id="getAllUsers" resultType="User">
+        select * from users
+    </select>
+
+    <select id="getUserById" resultType="User">
+        select * from users where id = #{id}
+    </select>
+
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
+        insert into users (username, password) values (#{username}, #{password})
+    </insert>
+
+    <update id="updateUser">
+        update users set username = #{username}, password = #{password} where id = #{id}
+    </update>
+
+    <select id="getByUsername" resultType="User">
+        select * from users where username = #{username}
+    </select>
+
+    <!-- 动态 SQL：根据是否有 username 参数决定是否加模糊查询 -->
+    <select id="getUsersByPage" resultType="User">
+        select * from users where 1=1
+        <if test="username != null and username != ''">
+            and username like concat('%', #{username}, '%')
+        </if>
+        order by id offset #{offset} rows fetch next #{size} rows only
+    </select>
+
+    <select id="countUsers" resultType="int">
+        select count(*) from users where 1=1
+        <if test="username != null and username != ''">
+            and username like concat('%', #{username}, '%')
+        </if>
+    </select>
+
+</mapper>

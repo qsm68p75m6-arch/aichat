@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ChatRecordMapper">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into chat_record (user_id, question, answer, create_time, session_id)
+        values (#{userId}, #{question}, #{answer}, #{createTime}, #{sessionId})
+    </insert>
+
+    <select id="getRecent" resultType="ChatRecord">
+        select top (#{limit}) * from chat_record
+        where user_id = #{userId}
+        order by create_time desc
+    </select>
+
+    <select id="getBySessionId" resultType="ChatRecord">
+        select top (#{limit}) * from chat_record
+        where user_id = #{userId} and session_id = #{sessionId}
+        order by create_time desc
+    </select>
+
+    <select id="getByUserId" resultType="ChatRecord">
+        select * from chat_record where user_id = #{userId} order by create_time desc
+    </select>
+
+</mapper>
