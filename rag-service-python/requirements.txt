@@ -1,0 +1,30 @@
+# ============================================================================
+# RAG 微服务 Python 依赖清单
+# ============================================================================
+
+# 【使用方式】在虚拟环境中执行: pip install -r requirements.txt
+
+# ---- Web 框架 ----
+# fastapi>=0.104.0          # FastAPI Web 框架（类似 Java 的 Spring MVC）
+# uvicorn[standard]>=0.24.0  # ASGI 服务器（类似 Java 的 Tomcat）
+# pydantic>=2.5.0           # 数据校验与序列化（类似 Java 的 Bean Validation + Jackson）
+
+# ---- LangChain 核心（RAG 编排框架）----
+# langchain>=0.1.0              # LangChain 主框架
+# langchain-community>=0.0.10   # 社区集成组件（加载器、向量库等）
+# langchain-huggingface>=0.0.1  # HuggingFace 模型集成
+
+# ---- 向量数据库 ----
+# chromadb>=0.4.22           # 轻量级嵌入式向量数据库（类似 SQLite 的定位）
+
+# ---- Embedding & 向量化 ----
+# sentence-transformers>=2.2.2  # HuggingFace 的文本向量化库（底层是 PyTorch/Transformers）
+
+# ---- 关键词检索 (BM25) ----
+# rank_bm25>=0.2.2            # BM25Okapi 算法实现（纯 Python，无外部依赖）
+
+# ---- 文档解析 ----
+# pypdf>=3.17.0               # PDF 文件解析器
+
+# ---- HTTP 客户端（用于调用其他服务）----
+# httpx>=0.25.0               # 异步 HTTP 客户端（FastAPI 内部使用）
